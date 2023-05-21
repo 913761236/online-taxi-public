@@ -1,0 +1,4 @@
+# Project exclude paths
+/api-passenger/target/
+/intern-common-web-stater/target/
+/service-verification-code/target/
