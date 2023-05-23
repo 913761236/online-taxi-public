@@ -7,7 +7,7 @@
         <artifactId>online-taxi-public</artifactId>
         <version>1.0.0-SNAPSHOT</version>
     </parent>
-    <artifactId>intern-common-web-stater</artifactId>
+    <artifactId>internal-common</artifactId>
     <packaging>jar</packaging>
 
     <dependencies>

@@ -9,7 +9,6 @@ import org.springframework.http.converter.StringHttpMessageConverter;
 import org.springframework.http.converter.json.JsonbHttpMessageConverter;
 import org.springframework.http.server.ServerHttpRequest;
 import org.springframework.http.server.ServerHttpResponse;
-import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseBodyAdvice;
@@ -22,7 +21,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
  * @author qijie
  * @date 2023/5/21E
  */
-@ControllerAdvice("com.jerry")
 public class CommonJsonResponseAdvice implements ResponseBodyAdvice<Object> {
 
     @Resource
