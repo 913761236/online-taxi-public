@@ -1,4 +1,5 @@
 # Project exclude paths
 /api-passenger/target/
-/intern-common-web-stater/target/
+/internal-common/target/
 /service-verification-code/target/
+/service-user/target/
