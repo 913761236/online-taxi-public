@@ -9,12 +9,16 @@
 
     <name>online-taxi-public</name>
 
+    <modules>
+        <module>api-passenger</module>
+        <module>service-verification-code</module>
+        <module>internal-common</module>
+    </modules>
+
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
-
-        <!--        <lettuce.version>6.1.10.RELEASE</lettuce.version>-->
 
         <spring-boot.version>2.4.13</spring-boot.version>
         <spring-cloud-alibaba.version>2021.1</spring-cloud-alibaba.version>
