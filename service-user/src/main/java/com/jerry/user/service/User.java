@@ -19,11 +19,11 @@ public class User {
 
     private LocalDateTime updateTime;
 
-    private String phone;
+    private String passengerPhone;
 
-    private String userName;
+    private String passengerName;
 
-    private byte gender;
+    private byte passengerGender;
 
     private byte state;
 }

@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.jerry.apipassenger.dto.VerificationCodeDTO;
 import com.jerry.apipassenger.service.VerificationCodeService;
+import com.jerry.common.response.JsonResponseWrapper;
 
 /**
  * description
@@ -23,9 +24,11 @@ public class VerificationCodeController {
     }
 
     @GetMapping("/verification-code")
-    public String verificationCode(@RequestBody VerificationCodeDTO verificationCodeDTO) {
+    public JsonResponseWrapper<VerificationCodeDTO>
+        verificationCode(@RequestBody VerificationCodeDTO verificationCodeDTO) {
         String phone = verificationCodeDTO.getPassengerPhone();
-        System.out.println(phone);
-        return service.generateVerificationCode(phone);
+        String verificationCode = service.createVerificationCode(phone);
+        verificationCodeDTO.setCode(verificationCode);
+        return JsonResponseWrapper.success(verificationCodeDTO);
     }
 }
