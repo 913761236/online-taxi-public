@@ -1,15 +1,23 @@
 package com.jerry.service;
 
+import java.util.concurrent.ThreadLocalRandom;
+
+import org.springframework.stereotype.Service;
+
 /**
  * description
  *
  * @author qijie
  * @date 2023/5/23
  */
-public interface VerificationCodeService {
+@Service
+public class VerificationCodeService {
 
-    String generateCode(String identityId);
+    public String createCode(int size) {
+        ThreadLocalRandom random = ThreadLocalRandom.current();
+        int num = random.nextInt((int)(Math.pow(10, size) * 0.9999999));
 
-    boolean checkCode(String identityId, String code);
+        return String.format("%0" + size + "d", num);
+    }
 
 }

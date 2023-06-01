@@ -1,11 +1,11 @@
 package com.jerry.apipassenger.controller;
 
+import com.jerry.apipassenger.service.vcode.VerificationCodeService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.jerry.apipassenger.dto.VerificationCodeDTO;
-import com.jerry.apipassenger.service.VerificationCodeService;
 import com.jerry.common.response.JsonResponseWrapper;
 
 /**

@@ -37,9 +37,17 @@ public class JsonResponseWrapper<T> {
         return wrapper;
     }
 
-    public static <T> JsonResponseWrapper<T> failure(T data) {
+    public static <T> JsonResponseWrapper<T> failure(StatusCode code, T data) {
         JsonResponseWrapper<T> wrapper = new JsonResponseWrapper<>();
+        wrapper.setCode(code.getCode());
         wrapper.data = data;
+        return wrapper;
+    }
+
+    public static JsonResponseWrapper<String> failure(StatusCode code) {
+        JsonResponseWrapper<String> wrapper = new JsonResponseWrapper<>();
+        wrapper.setCode(code.getCode());
+        wrapper.setData(code.getMessage());
         return wrapper;
     }
 }

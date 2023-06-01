@@ -3,7 +3,7 @@ package com.jerry.user.mapper;
 import org.springframework.stereotype.Repository;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.jerry.user.service.User;
+import com.jerry.common.dto.PassengerUser;
 
 /**
  * description
@@ -12,7 +12,8 @@ import com.jerry.user.service.User;
  * @date 2023/5/23
  */
 @Repository
-public interface UserMapper extends BaseMapper<User> {
+public interface PassengerUserMapper extends BaseMapper<PassengerUser> {
 
     Integer countUserByPhone(String phone);
+
 }

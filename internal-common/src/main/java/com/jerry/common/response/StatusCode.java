@@ -19,7 +19,12 @@ public enum StatusCode {
 
     SC_INTERNAL_ERROR(500, "系统内部异常，请稍后重试"),
 
-    SC_OK(200, "");
+    SC_OK(200, ""),
+
+    /**
+     * 用户业务提示：1200 - 1299
+     */
+    SC_USER_NOT_EXISTS(1200, "当前的用户不存在");
 
     private final Integer code;
 

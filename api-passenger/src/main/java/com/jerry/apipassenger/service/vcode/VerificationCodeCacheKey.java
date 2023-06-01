@@ -1,4 +1,4 @@
-package com.jerry.apipassenger.service;
+package com.jerry.apipassenger.service.vcode;
 
 import java.text.MessageFormat;
 

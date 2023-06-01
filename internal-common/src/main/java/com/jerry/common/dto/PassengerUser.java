@@ -1,4 +1,4 @@
-package com.jerry.user.service;
+package com.jerry.common.dto;
 
 import java.time.LocalDateTime;
 
@@ -11,7 +11,7 @@ import lombok.Data;
  * @date 2023/5/23
  */
 @Data
-public class User {
+public class PassengerUser {
 
     private Long id;
 
