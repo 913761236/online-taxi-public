@@ -1,4 +1,4 @@
-package com.jerry.apipassenger.service.vcode.token;
+package com.jerry.apipassenger.service.token;
 
 import java.util.concurrent.TimeUnit;
 

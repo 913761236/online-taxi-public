@@ -1,5 +1,6 @@
 package com.jerry.user.service;
 
+import java.time.LocalDateTime;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
@@ -37,4 +38,19 @@ public class PassengerUserService {
         }
     }
 
+    public void loginOrRegister(String passengerPhone) {
+        // 用户不存在则创建用户
+        if (!isUserExist(passengerPhone)) {
+            PassengerUser passengerUser = new PassengerUser();
+            passengerUser.setPassengerName("xxxxx");
+            passengerUser.setPassengerGender((byte)0);
+            passengerUser.setPassengerPhone(passengerPhone);
+            passengerUser.setState((byte)0);
+
+            LocalDateTime now = LocalDateTime.now();
+            passengerUser.setCreateTime(now);
+            passengerUser.setUpdateTime(now);
+            mapper.insert(passengerUser);
+        }
+    }
 }

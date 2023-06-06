@@ -1,4 +1,4 @@
-package com.jerry.apipassenger.dto;
+package com.jerry.common.dto;
 
 import lombok.Getter;
 import lombok.Setter;

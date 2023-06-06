@@ -1,14 +1,15 @@
 package com.jerry.apipassenger.controller;
 
-import com.jerry.apipassenger.service.vcode.token.TokenService;
-import com.jerry.common.dto.TokenDTO;
-import com.jerry.common.response.JsonResponseWrapper;
-import com.jerry.common.response.StatusCode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.jerry.apipassenger.service.token.TokenService;
+import com.jerry.common.dto.TokenDTO;
+import com.jerry.common.response.JsonResponseWrapper;
+import com.jerry.common.response.StatusCode;
 
 /**
  * description

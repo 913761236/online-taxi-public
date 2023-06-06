@@ -1,11 +1,10 @@
 package com.jerry.user.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.jerry.common.dto.PassengerUser;
+import com.jerry.common.dto.VerificationCodeDTO;
 import com.jerry.common.response.JsonResponseWrapper;
 import com.jerry.common.response.StatusCode;
 import com.jerry.user.service.PassengerUserService;
@@ -22,8 +21,11 @@ public class PassengerUserController {
     @Autowired
     private PassengerUserService userService;
 
-    public void user() {
-
+    @PostMapping("/user")
+    public JsonResponseWrapper loginOrRegister(@RequestBody VerificationCodeDTO verificationCodeDTO) {
+        String passengerPhone = verificationCodeDTO.getPassengerPhone();
+        userService.loginOrRegister(passengerPhone);
+        return JsonResponseWrapper.success();
     }
 
     @GetMapping("/user/{passengerPhone}")

@@ -31,6 +31,10 @@ public class JsonResponseWrapper<T> {
         this.message = sc.getMessage();
     }
 
+    public static <T> JsonResponseWrapper<T> success() {
+        return new JsonResponseWrapper<>(StatusCode.SC_OK);
+    }
+
     public static <T> JsonResponseWrapper<T> success(T data) {
         JsonResponseWrapper<T> wrapper = new JsonResponseWrapper<>(StatusCode.SC_OK);
         wrapper.data = data;

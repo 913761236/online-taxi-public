@@ -15,6 +15,7 @@
         <module>service-verification-code</module>
         <module>service-passenger-user</module>
         <module>service-map</module>
+        <module>service-price</module>
     </modules>
 
     <properties>
