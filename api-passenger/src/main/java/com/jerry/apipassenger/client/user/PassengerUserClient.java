@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 import com.jerry.common.dto.PassengerUser;
 import com.jerry.common.dto.VerificationCodeDTO;
-import com.jerry.common.response.JsonResponseWrapper;
+import com.jerry.common.response.JsonRespWrapper;
 
 /**
  * description
@@ -20,8 +20,8 @@ import com.jerry.common.response.JsonResponseWrapper;
 public interface PassengerUserClient {
 
     @PostMapping("/user")
-    JsonResponseWrapper<PassengerUser> loginOrRegister(@RequestBody VerificationCodeDTO verificationCodeDTO);
+    JsonRespWrapper<PassengerUser> loginOrRegister(@RequestBody VerificationCodeDTO verificationCodeDTO);
 
     @GetMapping("/user/{passengerPhone}")
-    JsonResponseWrapper<PassengerUser> getUserByPhone(@PathVariable("passengerPhone") String passengerPhone);
+    JsonRespWrapper<PassengerUser> getUserByPhone(@PathVariable("passengerPhone") String passengerPhone);
 }

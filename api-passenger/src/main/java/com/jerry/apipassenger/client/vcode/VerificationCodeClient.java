@@ -4,7 +4,7 @@ import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
-import com.jerry.common.response.JsonResponseWrapper;
+import com.jerry.common.response.JsonRespWrapper;
 
 /**
  * @author qijie
@@ -13,7 +13,7 @@ import com.jerry.common.response.JsonResponseWrapper;
 @FeignClient("service-verification-code")
 public interface VerificationCodeClient {
 
-    @GetMapping("verification-cde/{size}")
-    JsonResponseWrapper<String> createCode(@PathVariable("size") int size);
+    @GetMapping("/verification-code/{size}")
+    JsonRespWrapper<String> createCode(@PathVariable("size") int size);
 
 }

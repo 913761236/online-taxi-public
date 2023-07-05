@@ -3,7 +3,7 @@ package com.jerry.map.remote;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.jerry.common.response.JsonResponseWrapper;
+import com.jerry.common.response.JsonRespWrapper;
 import com.jerry.map.configuration.MapProperties;
 
 /**
@@ -21,7 +21,7 @@ public class ServiceClient {
     // @Autowired
     // private RestTemplate restTemplate;
 
-    public JsonResponseWrapper add(String name) {
+    public JsonRespWrapper add(String name) {
         String url = properties.getServerAddress() + "?key=" + properties.getKey() + "&name=" + name;
         // ResponseEntity<String> forEntity = restTemplate.postForEntity(url.toString(), null, String.class);
         // String body = forEntity.getBody();

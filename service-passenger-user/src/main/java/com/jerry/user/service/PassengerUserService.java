@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.jerry.common.dto.PassengerUser;
+import com.jerry.common.response.JsonRespWrapper;
+import com.jerry.common.response.StatusCode;
 import com.jerry.user.mapper.PassengerUserMapper;
 
 /**
@@ -27,18 +29,18 @@ public class PassengerUserService {
         return mapper.countUserByPhone(phone) > 0;
     }
 
-    public PassengerUser getUserByPhone(String passengerPhone) {
+    public JsonRespWrapper getUserByPhone(String passengerPhone) {
         Map<String, Object> param = Collections.singletonMap("passenger_phone", passengerPhone);
         List<PassengerUser> passengerUsers = mapper.selectByMap(param);
         if (passengerUsers.isEmpty()) {
-            return null;
+            return JsonRespWrapper.failure(StatusCode.SC_USER_NOT_EXISTS);
         }
         else {
-            return passengerUsers.get(0);
+            return JsonRespWrapper.success(passengerUsers.get(0));
         }
     }
 
-    public void loginOrRegister(String passengerPhone) {
+    public JsonRespWrapper loginOrRegister(String passengerPhone) {
         // 用户不存在则创建用户
         if (!isUserExist(passengerPhone)) {
             PassengerUser passengerUser = new PassengerUser();
@@ -52,5 +54,7 @@ public class PassengerUserService {
             passengerUser.setUpdateTime(now);
             mapper.insert(passengerUser);
         }
+
+        return JsonRespWrapper.success();
     }
 }

@@ -12,7 +12,7 @@ import org.springframework.web.servlet.HandlerInterceptor;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.jerry.common.dto.AccessToken;
-import com.jerry.common.response.JsonResponseWrapper;
+import com.jerry.common.response.JsonRespWrapper;
 import com.jerry.common.response.StatusCode;
 import com.jerry.common.util.AccessTokenCacheKey;
 import com.jerry.common.util.JwtUtil;
@@ -53,7 +53,7 @@ public class JwtInterceptor implements HandlerInterceptor {
 
         if (!canAccess) {
             PrintWriter writer = response.getWriter();
-            JsonResponseWrapper<String> failure = JsonResponseWrapper.failure(StatusCode.SC_ACCESS_DENIED);
+            JsonRespWrapper<String> failure = JsonRespWrapper.failure(StatusCode.SC_ACCESS_DENIED);
             failure.setData(errorMessage);
             writer.println(mapper.writeValueAsString(failure));
         }

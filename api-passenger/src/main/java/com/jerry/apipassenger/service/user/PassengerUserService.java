@@ -5,8 +5,7 @@ import org.springframework.stereotype.Service;
 
 import com.jerry.apipassenger.client.user.PassengerUserClient;
 import com.jerry.common.dto.AccessToken;
-import com.jerry.common.dto.PassengerUser;
-import com.jerry.common.response.JsonResponseWrapper;
+import com.jerry.common.response.JsonRespWrapper;
 import com.jerry.common.util.JwtUtil;
 
 /**
@@ -21,10 +20,9 @@ public class PassengerUserService {
     @Autowired
     private PassengerUserClient userClient;
 
-    public PassengerUser getUserByAccessToken(String accessToken) {
+    public JsonRespWrapper getUserByAccessToken(String accessToken) {
         AccessToken token = JwtUtil.parseToken(accessToken);
         String phone = token.getPhone();
-        JsonResponseWrapper<PassengerUser> userWrapper = userClient.getUserByPhone(phone);
-        return userWrapper.getData();
+        return userClient.getUserByPhone(phone);
     }
 }

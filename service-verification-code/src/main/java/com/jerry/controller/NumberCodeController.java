@@ -5,11 +5,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.jerry.common.response.JsonResponseWrapper;
+import com.jerry.common.response.JsonRespWrapper;
 import com.jerry.service.VerificationCodeService;
 
 /**
- * description
+ * 验证码服务接口
  *
  * @author qijie
  * @date 2023/5/21
@@ -21,7 +21,8 @@ public class NumberCodeController {
     private VerificationCodeService service;
 
     @GetMapping("/verification-code/{size}")
-    public JsonResponseWrapper<String> numberCode(@PathVariable Integer size) {
+    public JsonRespWrapper<String> numberCode(@PathVariable Integer size) {
+        // 限制验证码的长度
         if (size <= 4) {
             size = 4;
         }
@@ -30,7 +31,7 @@ public class NumberCodeController {
             size = 8;
         }
         String code = service.createCode(size);
-        return JsonResponseWrapper.success(code);
+        return JsonRespWrapper.success(code);
     }
 
 }

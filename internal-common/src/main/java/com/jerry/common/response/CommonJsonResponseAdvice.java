@@ -49,11 +49,11 @@ public class CommonJsonResponseAdvice implements ResponseBodyAdvice<Object> {
         Class<? extends HttpMessageConverter<?>> selectedConverterType, ServerHttpRequest request,
         ServerHttpResponse response) {
 
-        if (body instanceof JsonResponseWrapper) {
+        if (body instanceof JsonRespWrapper) {
             return body;
         }
 
-        JsonResponseWrapper<Object> wrapper = JsonResponseWrapper.success(body);
+        JsonRespWrapper<Object> wrapper = JsonRespWrapper.success(body);
 
         // 如果是使用的StringHttpMessageConverter，重写响应头
         if (StringHttpMessageConverter.class.isAssignableFrom(selectedConverterType)) {

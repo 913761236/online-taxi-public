@@ -7,8 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.jerry.apipassenger.service.user.PassengerUserService;
-import com.jerry.common.dto.PassengerUser;
-import com.jerry.common.response.JsonResponseWrapper;
+import com.jerry.common.response.JsonRespWrapper;
 
 /**
  * description
@@ -23,8 +22,8 @@ public class UserController {
     private PassengerUserService userService;
 
     @GetMapping("/user")
-    public JsonResponseWrapper<PassengerUser> getUser(HttpServletRequest request) {
+    public JsonRespWrapper getUser(HttpServletRequest request) {
         String accessToken = request.getHeader("Authorization");
-        return JsonResponseWrapper.success(userService.getUserByAccessToken(accessToken));
+        return JsonRespWrapper.success(userService.getUserByAccessToken(accessToken));
     }
 }

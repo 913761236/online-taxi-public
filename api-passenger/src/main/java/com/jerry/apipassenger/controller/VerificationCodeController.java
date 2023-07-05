@@ -1,12 +1,14 @@
 package com.jerry.apipassenger.controller;
 
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.jerry.apipassenger.service.vcode.VerificationCodeService;
+import com.jerry.common.dto.TokenDTO;
 import com.jerry.common.dto.VerificationCodeDTO;
-import com.jerry.common.response.JsonResponseWrapper;
+import com.jerry.common.response.JsonRespWrapper;
 
 /**
  * description
@@ -24,11 +26,19 @@ public class VerificationCodeController {
     }
 
     @GetMapping("/verification-code")
-    public JsonResponseWrapper<VerificationCodeDTO>
-        verificationCode(@RequestBody VerificationCodeDTO verificationCodeDTO) {
+    public JsonRespWrapper<VerificationCodeDTO> verificationCode(@RequestBody VerificationCodeDTO verificationCodeDTO) {
         String phone = verificationCodeDTO.getPassengerPhone();
-        String verificationCode = service.createVerificationCode(phone);
-        verificationCodeDTO.setCode(verificationCode);
-        return JsonResponseWrapper.success(verificationCodeDTO);
+
+        return service.createVerificationCode(phone);
+    }
+
+    @PostMapping("/verification-code-check")
+    public JsonRespWrapper<TokenDTO> checkVerificationCode(@RequestBody VerificationCodeDTO verificationCodeDTO) {
+        String passengerPhone = verificationCodeDTO.getPassengerPhone();
+        String verificationCode = verificationCodeDTO.getCode();
+
+        System.out.println("手机号" + passengerPhone + ",验证码：" + verificationCode);
+
+        return service.checkCode(passengerPhone, verificationCode);
     }
 }

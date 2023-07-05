@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.jerry.apipassenger.service.token.TokenService;
 import com.jerry.common.dto.TokenDTO;
-import com.jerry.common.response.JsonResponseWrapper;
+import com.jerry.common.response.JsonRespWrapper;
 import com.jerry.common.response.StatusCode;
 
 /**
@@ -25,14 +25,14 @@ public class TokenController {
     private TokenService service;
 
     @PostMapping("/token-refresh")
-    public JsonResponseWrapper refreshToken(@RequestBody TokenDTO tokenDTO) {
+    public JsonRespWrapper refreshToken(@RequestBody TokenDTO tokenDTO) {
         String refreshToken  =tokenDTO.getRefreshToken();
 
         TokenDTO respToken = service.refreshAccessToken(refreshToken);
         if (respToken == null) {
-            return JsonResponseWrapper.failure(StatusCode.SC_TOKEN_REFRESH_ERROR);
+            return JsonRespWrapper.failure(StatusCode.SC_TOKEN_REFRESH_ERROR);
         }
 
-        return JsonResponseWrapper.success(respToken);
+        return JsonRespWrapper.success(respToken);
     }
 }

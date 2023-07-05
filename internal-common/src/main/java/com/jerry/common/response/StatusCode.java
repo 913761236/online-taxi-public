@@ -22,10 +22,17 @@ public enum StatusCode {
     SC_OK(200, ""),
 
     SC_TOKEN_REFRESH_ERROR(800, "刷新token错误"),
+
+    /**
+     * 验证码错误提示：1000-1099
+     */
+    VERIFICATION_CODE_ERROR(1000, "验证码不正确"),
+
     /**
      * 用户业务提示：1200 - 1299
      */
     SC_USER_NOT_EXISTS(1200,"当前的用户不存在");
+
 
     private final Integer code;
 
