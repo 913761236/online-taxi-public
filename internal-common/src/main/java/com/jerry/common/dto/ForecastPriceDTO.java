@@ -22,4 +22,5 @@ public class ForecastPriceDTO {
     private String cityCode;
 
     private String vehicleType;
+
 }

@@ -1,0 +1,16 @@
+server:
+  port: 8092
+spring:
+  application:
+    name: api-driver
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 192.168.1.3:8888
+        username: nacos
+        password: nacos
+  redis:
+    host: localhost
+    port: 32768
+    username: default
+    password: redispw

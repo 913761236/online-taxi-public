@@ -1,0 +1,22 @@
+server:
+  port: 8094
+spring:
+  application:
+    name: service-driver-user
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 192.168.1.3:8888
+        username: nacos
+        password: nacos
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/study
+    username: root
+    password: Gepoint
+logging:
+  level:
+    com.jerry: debug
+mybatis-plus:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl

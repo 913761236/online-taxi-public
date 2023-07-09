@@ -16,6 +16,11 @@
         <module>service-passenger-user</module>
         <module>service-map</module>
         <module>service-price</module>
+        <module>service-driver-user</module>
+        <module>api-boss</module>
+        <module>api-driver</module>
+        <module>service-order</module>
+        <module>service-pay</module>
     </modules>
 
     <properties>
@@ -29,6 +34,8 @@
         <spring-data-bom.version>2021.2.11</spring-data-bom.version>
 
         <mybatis-plus.version>3.5.2</mybatis-plus.version>
+        <mybatis-plus-generator.version>3.5.2</mybatis-plus-generator.version>
+        <freemarker.version>2.3.31</freemarker.version>
         <java-jwt.version>3.19.2</java-jwt.version>
     </properties>
 
@@ -40,6 +47,12 @@
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>net.sf.json-lib</groupId>
+            <artifactId>json-lib</artifactId>
+            <version>2.4</version>
+            <classifier>jdk15</classifier>
         </dependency>
     </dependencies>
 
@@ -70,6 +83,16 @@
                 <groupId>com.baomidou</groupId>
                 <artifactId>mybatis-plus-boot-starter</artifactId>
                 <version>${mybatis-plus.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.baomidou</groupId>
+                <artifactId>mybatis-plus-generator</artifactId>
+                <version>${mybatis-plus-generator.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.freemarker</groupId>
+                <artifactId>freemarker</artifactId>
+                <version>${freemarker.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.auth0</groupId>

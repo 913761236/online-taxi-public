@@ -13,6 +13,10 @@ public class TokenDTO {
 
     private String refreshToken;
 
+    public TokenDTO() {
+
+    }
+
     public TokenDTO(String accessToken, String refreshToken) {
         this.accessToken = accessToken;
         this.refreshToken = refreshToken;

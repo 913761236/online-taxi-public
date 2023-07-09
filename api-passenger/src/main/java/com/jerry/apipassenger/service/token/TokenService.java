@@ -7,9 +7,9 @@ import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
+import com.jerry.common.cache.key.AccessTokenCacheKey;
 import com.jerry.common.dto.AccessToken;
 import com.jerry.common.dto.TokenDTO;
-import com.jerry.common.util.AccessTokenCacheKey;
 import com.jerry.common.util.JwtUtil;
 import com.jerry.common.util.TokenType;
 
@@ -42,7 +42,7 @@ public class TokenService {
         String accessTokenNew = JwtUtil.createToken(phone, identity, TokenType.ACCESS_TOKEN);
         String refreshTokenNew = JwtUtil.createToken(phone, identity, TokenType.REFRESH_TOKEN);
 
-        String accessTokenCacheKey = AccessTokenCacheKey.getRefreshTokenCacheKey(phone, identity);
+        String accessTokenCacheKey = AccessTokenCacheKey.getAccessTokenCacheKey(phone, identity);
         redisTemplate.opsForValue().set(accessTokenCacheKey, accessTokenNew, 30, TimeUnit.DAYS);
         redisTemplate.opsForValue().set(refreshTokenCacheKey, refreshTokenNew, 31, TimeUnit.DAYS);
         return new TokenDTO(accessTokenNew, refreshTokenNew);

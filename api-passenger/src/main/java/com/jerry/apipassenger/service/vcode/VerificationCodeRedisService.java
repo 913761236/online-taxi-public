@@ -10,12 +10,14 @@ import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
-import com.jerry.apipassenger.client.user.PassengerUserClient;
-import com.jerry.apipassenger.client.vcode.VerificationCodeClient;
+import com.jerry.apipassenger.remote.user.ServicePassengerUserClient;
+import com.jerry.apipassenger.remote.vcode.VerificationCodeClient;
+import com.jerry.common.cache.key.AccessTokenCacheKey;
+import com.jerry.common.cache.key.VerificationCodeCacheKey;
+import com.jerry.common.constast.UserIdentity;
 import com.jerry.common.dto.TokenDTO;
 import com.jerry.common.dto.VerificationCodeDTO;
 import com.jerry.common.response.JsonRespWrapper;
-import com.jerry.common.util.IdentityType;
 import com.jerry.common.util.JwtUtil;
 import com.jerry.common.util.TokenType;
 
@@ -35,13 +37,13 @@ public class VerificationCodeRedisService implements VerificationCodeService {
     private VerificationCodeClient verificationCodeClient;
 
     @Autowired
-    private PassengerUserClient passengerUserClient;
+    private ServicePassengerUserClient servicePassengerUserClient;
 
     @Override
     public JsonRespWrapper createVerificationCode(String phone) {
         JsonRespWrapper<String> response = verificationCodeClient.createCode(6);
         String code = response.getData();
-        redisTemplate.boundValueOps(VerificationCodeCacheKey.getVerificationCodeKey(phone))
+        redisTemplate.boundValueOps(VerificationCodeCacheKey.getVerificationCodeKey(phone, UserIdentity.PASSENGER))
             .set(response.getData(), Duration.ofMinutes(5));
 
         // 需要将验证码发送给短信服务商，例如阿里短信服务等
@@ -54,7 +56,9 @@ public class VerificationCodeRedisService implements VerificationCodeService {
 
     @Override
     public JsonRespWrapper checkCode(String phone, String code) {
-        String codeInServer = redisTemplate.boundValueOps(VerificationCodeCacheKey.getVerificationCodeKey(phone)).get();
+        String codeInServer =
+            redisTemplate.boundValueOps(VerificationCodeCacheKey.getVerificationCodeKey(phone, UserIdentity.PASSENGER))
+                .get();
 
         if (!StringUtils.hasText(codeInServer)) {
             return JsonRespWrapper.failure(VERIFICATION_CODE_ERROR);
@@ -66,15 +70,15 @@ public class VerificationCodeRedisService implements VerificationCodeService {
         // 判断用户是否存在，不存在需要创建用户
         VerificationCodeDTO codeDTO = new VerificationCodeDTO();
         codeDTO.setPassengerPhone(phone);
-        passengerUserClient.loginOrRegister(codeDTO);
+        servicePassengerUserClient.loginOrRegister(codeDTO);
 
         // 用户登录，颁发令牌
-        String accessToken = JwtUtil.createToken(phone, IdentityType.PASSENGER_IDENTITY, TokenType.ACCESS_TOKEN);
-        String refreshToken = JwtUtil.createToken(phone, IdentityType.PASSENGER_IDENTITY, TokenType.REFRESH_TOKEN);
+        String accessToken = JwtUtil.createToken(phone, UserIdentity.PASSENGER, TokenType.ACCESS_TOKEN);
+        String refreshToken = JwtUtil.createToken(phone, UserIdentity.PASSENGER, TokenType.REFRESH_TOKEN);
 
         // token存入redis方便后续使用
-        String accessTokenCacheKey = TokenCacheKey.getAccessTokenCacheKey(phone, IdentityType.PASSENGER_IDENTITY);
-        String refreshTokenCacheKey = TokenCacheKey.getRefreshTokenCacheKey(phone, IdentityType.PASSENGER_IDENTITY);
+        String accessTokenCacheKey = AccessTokenCacheKey.getAccessTokenCacheKey(phone, UserIdentity.PASSENGER);
+        String refreshTokenCacheKey = AccessTokenCacheKey.getRefreshTokenCacheKey(phone, UserIdentity.PASSENGER);
         redisTemplate.opsForValue().set(accessTokenCacheKey, accessToken, 30, TimeUnit.DAYS);
         redisTemplate.opsForValue().set(refreshTokenCacheKey, refreshToken, 31, TimeUnit.DAYS);
 

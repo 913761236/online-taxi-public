@@ -11,10 +11,10 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.servlet.HandlerInterceptor;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.jerry.common.cache.key.AccessTokenCacheKey;
 import com.jerry.common.dto.AccessToken;
 import com.jerry.common.response.JsonRespWrapper;
 import com.jerry.common.response.StatusCode;
-import com.jerry.common.util.AccessTokenCacheKey;
 import com.jerry.common.util.JwtUtil;
 
 /**
@@ -42,13 +42,16 @@ public class JwtInterceptor implements HandlerInterceptor {
             errorMessage = "access token not found in header";
         }
 
-        AccessToken accessToken = JwtUtil.checkToken(token);
         // 携带了访问令牌，判断是否有效
-        String cacheKey = AccessTokenCacheKey.getAccessTokenCacheKey(accessToken.getPhone(), accessToken.getIdentity());
-        String tokenInCache = redisTemplate.opsForValue().get(cacheKey);
-        if (tokenInCache == null || !tokenInCache.equals(token)) {
-            canAccess = false;
-            errorMessage = "access token invalid";
+        if (canAccess) {
+            AccessToken accessToken = JwtUtil.checkToken(token);
+            String cacheKey =
+                AccessTokenCacheKey.getAccessTokenCacheKey(accessToken.getPhone(), accessToken.getIdentity());
+            String tokenInCache = redisTemplate.opsForValue().get(cacheKey);
+            if (tokenInCache == null || !tokenInCache.equals(token)) {
+                canAccess = false;
+                errorMessage = "access token invalid";
+            }
         }
 
         if (!canAccess) {

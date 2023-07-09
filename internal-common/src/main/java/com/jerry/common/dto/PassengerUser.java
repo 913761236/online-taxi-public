@@ -15,10 +15,6 @@ public class PassengerUser {
 
     private Long id;
 
-    private LocalDateTime createTime;
-
-    private LocalDateTime updateTime;
-
     private String passengerPhone;
 
     private String passengerName;
@@ -28,4 +24,8 @@ public class PassengerUser {
     private byte state;
 
     private String profilePhoto;
+
+    private LocalDateTime createTime;
+
+    private LocalDateTime updateTime;
 }

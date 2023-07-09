@@ -31,8 +31,10 @@ public class JsonRespWrapper<T> {
         this.message = sc.getMessage();
     }
 
-    public static <T> JsonRespWrapper<T> success() {
-        return new JsonRespWrapper<>(StatusCode.SC_OK);
+    public static JsonRespWrapper<String> success() {
+        JsonRespWrapper<String> wrapper = new JsonRespWrapper<>(StatusCode.SC_OK);
+        wrapper.data = "";
+        return wrapper;
     }
 
     public static <T> JsonRespWrapper<T> success(T data) {
@@ -44,6 +46,7 @@ public class JsonRespWrapper<T> {
     public static <T> JsonRespWrapper<T> failure(StatusCode code, T data) {
         JsonRespWrapper<T> wrapper = new JsonRespWrapper<>();
         wrapper.setCode(code.getCode());
+        wrapper.setMessage(code.getMessage());
         wrapper.data = data;
         return wrapper;
     }
@@ -51,7 +54,7 @@ public class JsonRespWrapper<T> {
     public static JsonRespWrapper<String> failure(StatusCode code) {
         JsonRespWrapper<String> wrapper = new JsonRespWrapper<>();
         wrapper.setCode(code.getCode());
-        wrapper.setData(code.getMessage());
+        wrapper.setMessage(code.getMessage());
         return wrapper;
     }
 }

@@ -25,7 +25,7 @@ public class JwtConfiguration implements WebMvcConfigurer {
             // 不拦截的路径
             .excludePathPatterns("/verification-code")
             .excludePathPatterns("/verification-code-check")
-            .excludePathPatterns("/token")
+            .excludePathPatterns("/token/**")
             .excludePathPatterns("/error");
 
     }

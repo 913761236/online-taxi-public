@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jerry.servicedriver.mapper.DriverUserWorkStatusMapper">
+    <update id="updateWorkStatus">
+        update driver_user_work_status set work_status = #{workStatus} where driver_id = #{driverId}
+    </update>
+</mapper>
